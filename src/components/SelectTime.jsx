@@ -3,20 +3,21 @@ import styled from "styled-components";
 
 export default function SelectTime(prop) {
 
-    console.log(prop)
+    let days = [... prop.movieDays]
+    
 
   return (
   <>
   <Container>
-  <h2>Quinta-feira - 24/06/2021</h2>
+  {days.map((n)=><><h2>{n.weekday}</h2>
   <Options>
-    <Button>15:00</Button>
-    <Button>15:00</Button>
-  </Options>
+    {n.showtimes.map((m)=><Button onClick={()=>{prop.movieSection(m.id)}}>{m.name}</Button>)}
+  </Options></>)}
+  
   </Container>
   
   <Footer>
-    <Banner><img src="https://m.media-amazon.com/images/M/MV5BZTJiZjFkNmYtNmU3My00MmE1LWI4YWEtNWFkZDJiOTgwMTNkXkEyXkFqcGdeQXVyMTg0MTI3Mg@@._V1_.jpg"/></Banner>
+    <Banner><img src={prop.moviePoster}/></Banner>
     <div>{prop.movieTitle}</div>
   </Footer>
     </>
@@ -43,6 +44,7 @@ align-items: center;
 const Container = styled.div`
     margin-left: 24px;
     margin-top: 24px;
+    margin-bottom: 150px;
 `
 
 const Footer = styled.div`

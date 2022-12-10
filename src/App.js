@@ -13,12 +13,11 @@ function App() {
   const [section, setSection]=useState('Selecione o filme')
   
   
-
   const [movies, setMovies] = useState()
   let getMovie = axios.get("https://mock-api.driven.com.br/api/v8/cineflex/movies")
   getMovie.then(movieSet) 
   
-
+  
   
   function movieSet(input){
     if(!movies)
@@ -28,9 +27,13 @@ function App() {
   
   const [time, setTime] = useState()
   
+  
+  const [movieSection, setMovieSection] = useState()
+  
+  
 
   /*apagar*/
-  let getHora = axios.get('https://mock-api.driven.com.br/api/v8/cineflex/movies/1/showtimes')
+  let getHora = axios.get('https://mock-api.driven.com.br/api/v8/cineflex/movies/2/showtimes')
   getHora.then(timeSet)
   /*apagar*/
   function timeSet (input){
@@ -49,7 +52,7 @@ function App() {
   {movies ? movies.map((n) => <SelectMovie movieId={n.id} movieTitle={n.title} moviePoster={n.posterURL} movieOverview={n.overview} movieReleaseDate={n.releaseDate} />) : <Loading />}
     
   </MovieCatalog>*/}
-  {time ?  <SelectTime movieTitle={time.title} /> : <Loading />}
+  {time ?  <SelectTime movieTitle={time.title} movieDays={time.days} moviePoster={time.posterURL} movieSection={(movieSection)=>setMovieSection(movieSection)} /> : <Loading />}
   </>
   );
 }
