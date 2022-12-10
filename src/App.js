@@ -7,6 +7,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import Loading from './components/Loading';
 import styled from 'styled-components';
+import SelectTime from './components/SelectTime';
 
 function App() {
   const [section, setSection]=useState('Selecione o filme')
@@ -16,12 +17,26 @@ function App() {
   const [movies, setMovies] = useState()
   let getMovie = axios.get("https://mock-api.driven.com.br/api/v8/cineflex/movies")
   getMovie.then(movieSet) 
-  console.log(movies)
+  
 
+  
   function movieSet(input){
     if(!movies)
     {setMovies(input.data)}
+    
+  }
   
+  const [time, setTime] = useState()
+  
+
+  /*apagar*/
+  let getHora = axios.get('https://mock-api.driven.com.br/api/v8/cineflex/movies/1/showtimes')
+  getHora.then(timeSet)
+  /*apagar*/
+  function timeSet (input){
+
+    if(!time){(setTime(input.data))}
+    
   }
   
 
@@ -29,11 +44,12 @@ function App() {
   <>
   <Header/>
   <Section section={section}/>
-  <MovieCatalog>
-   
+  {/*<MovieCatalog>
+
   {movies ? movies.map((n) => <SelectMovie movieId={n.id} movieTitle={n.title} moviePoster={n.posterURL} movieOverview={n.overview} movieReleaseDate={n.releaseDate} />) : <Loading />}
     
-  </MovieCatalog>
+  </MovieCatalog>*/}
+  {time ?  <SelectTime movieTitle={time.title} /> : <Loading />}
   </>
   );
 }
