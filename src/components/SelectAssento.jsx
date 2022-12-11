@@ -7,9 +7,7 @@ export default function SelectAssento(prop) {
  
   console.log(seats)
 
-  function toggle(input){
-
-  }
+ 
 
   return (
   <>
@@ -18,7 +16,7 @@ export default function SelectAssento(prop) {
       <form>
       <SeatSelection>
 
-        {seats.map((n) => n.isAvailable ? <Seat onClick={toggle} value={n.id}>{n.name}</Seat> : <SeatUnavailable value={n.id}>{n.name}</SeatUnavailable>)}
+        {seats.map((n) => n.isAvailable ? <Seat  value={n.id} number={n.name}></Seat> : <SeatUnavailable value={n.id}>{n.name}</SeatUnavailable>)}
           
       
       </SeatSelection>
