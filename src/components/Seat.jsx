@@ -1,20 +1,31 @@
 import { useState } from "react"
+import { createPortal } from "react-dom"
 import styled from "styled-components"
 
 let selectedSeats = []
 
 export default function Seat(prop){
     const [seatColor, setSeatColor] = useState('#5992d3') 
-
-    function selectedSeat(target){
-        selectedSeats.includes(prop.value) ?  selectedSeats=selectedSeats : selectedSeats.push(prop.value)
+    function toggleSelectedSeat(target){
+        selectedSeats.includes(prop.value) ?  removeSeat(prop.value) : selectedSeats.push(prop.value)
         seatColor == '#5992d3' ? setSeatColor('#1aae9e') : setSeatColor('#5992d3')
-        console.log(selectedSeats, target)
+        console.log(selectedSeats)
+        
+    }
+
+    function removeSeat(id){
+        for(let i=0;i<=selectedSeats.length;i++){
+            if(selectedSeats[i]===id){
+                selectedSeats.splice(i, 1)
+            }
+            
+        }
+        
     }
 
     return(
         <>
-        <SeatStyle onClick={() => selectedSeat(prop.number)} color={seatColor}>{prop.number}</SeatStyle>
+        <SeatStyle  onClick={() => {toggleSelectedSeat(prop.number); prop.ids(selectedSeats)}} color={seatColor}>{prop.number}</SeatStyle>
         </>
         )
     

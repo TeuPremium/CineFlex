@@ -1,22 +1,22 @@
+import { useState } from "react";
 import styled from "styled-components";
 import Seat from "./Seat";
 
 
 export default function SelectAssento(prop) {
   let seats = [... prop.seats]
- 
-  console.log(seats)
-
- 
-
+  
+  let [ids, setIds] = useState()
+  
+  console.log(ids)
   return (
   <>
-
+    
     <Container>
       <form>
       <SeatSelection>
 
-        {seats.map((n) => n.isAvailable ? <Seat  value={n.id} number={n.name}></Seat> : <SeatUnavailable value={n.id}>{n.name}</SeatUnavailable>)}
+        {seats.map((n) => n.isAvailable ? <Seat  value={n.id} number={n.name} ids={(ids) => setIds(ids)}></Seat> : <SeatUnavailable value={n.id}>{n.name}</SeatUnavailable>)}
           
       
       </SeatSelection>
@@ -30,6 +30,26 @@ export default function SelectAssento(prop) {
     <SeatDescription>
     <span>Selecionado</span>  <span>Disponivel</span> <span>Indisponivel</span>
     </SeatDescription>
+
+    <BuyerData>
+    <label>
+      <NameBuyer>
+        
+          <div>Nome do comprador:</div>
+        <input type='text'></input>
+        
+      </NameBuyer>
+      <CpfBuyer>
+      
+          <div>CPF do comprador:</div>
+        <input type='number'></input>
+        
+      </CpfBuyer>
+      <Submit>
+      <input type="submit"></input>
+      </Submit>
+      </label>
+    </BuyerData>
   </>
   );
 }
@@ -97,4 +117,47 @@ const SeatSelected = styled.div`
     margin-bottom: 18px;
     justify-content: center;
     align-items: center;
+`
+
+const CpfBuyer = styled.div`
+  width: 327px;
+  input{
+    border-color: #d4d4d4;
+    border-radius: 4px;
+    border-width: 1px;
+    border-style: solid;
+    background-color: white;
+    width: 327px;
+    height: 51px;
+  }
+`
+const NameBuyer = styled.div`
+  margin-top: 40px;
+  width: 327px;
+  input{
+    border-color: #d4d4d4;
+    border-radius: 4px;
+    border-width: 1px;
+    border-style: solid;
+    background-color: white;
+    width: 327px;
+    height: 51px;
+  }
+`
+const BuyerData = styled.div `
+  display: flex;
+  justify-content: center;
+`
+const Submit = styled.div `
+  display: flex;
+  justify-content: center;
+  margin-right: 25px;
+  input{
+    background-color: #e8833a;
+    border-width: 0px;
+    border-radius:3px;
+    width:225px;
+    height: 42px;
+    
+  }
 `
