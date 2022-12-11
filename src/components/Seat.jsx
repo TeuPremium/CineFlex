@@ -5,10 +5,10 @@ import styled from "styled-components"
 let selectedSeats = []
 
 export default function Seat(prop){
-    const [seatColor, setSeatColor] = useState('#5992d3') 
+    const [seatColor, setSeatColor] = useState('#c3cfd9') 
     function toggleSelectedSeat(target){
         selectedSeats.includes(prop.value) ?  removeSeat(prop.value) : selectedSeats.push(prop.value)
-        seatColor == '#5992d3' ? setSeatColor('#1aae9e') : setSeatColor('#5992d3')
+        seatColor == '#c3cfd9' ? setSeatColor('#1aae9e') : setSeatColor('#c3cfd9')
         console.log(selectedSeats)
         
     }

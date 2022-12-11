@@ -64,7 +64,7 @@ function App() {
   </MovieCatalog>
   {time ?  <SelectTime movieTitle={time.title} movieDays={time.days} moviePoster={time.posterURL} movieSection={(movieSection)=>setMovieSection(movieSection)} /> : <Loading />}
 */}
-  { movieSection ? <SelectAssento seats={movieSection.seats} movie={movieSection.movie} day={movieSection.day}/> : <Loading/>}
+  { movieSection ? <SelectAssento movieTitle={time.title} moviePoster={time.posterURL} seats={movieSection.seats} movie={movieSection.movie} day={movieSection.day} time={movieSection.name}/> : <Loading/>}
   
   </>
   );

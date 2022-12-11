@@ -8,7 +8,7 @@ export default function SelectAssento(prop) {
   
   let [ids, setIds] = useState()
   
-  console.log(ids)
+  console.log(prop.day.weekday)
   return (
   <>
     
@@ -46,10 +46,19 @@ export default function SelectAssento(prop) {
         
       </CpfBuyer>
       <Submit>
-      <input type="submit"></input>
+      <input type="submit" value='Reservar assento(s)'></input>
       </Submit>
       </label>
     </BuyerData>
+
+    <Footer>
+    <Banner><img src={prop.moviePoster}/></Banner>
+    <div>
+    <div>{prop.movieTitle}</div>
+    <div>{prop.day.weekday} {prop.time}</div>
+    </div>
+    </Footer>
+
   </>
   );
 }
@@ -82,7 +91,7 @@ const SeatAvailable = styled.div`
     width: 24px;
     height: 24px;
     border-radius: 24px;
-    background-color: #5992d3;
+    background-color: #c3cfd9;
     margin-right: 10px;
     margin-bottom: 18px;
     justify-content: center;
@@ -147,6 +156,7 @@ const NameBuyer = styled.div`
 const BuyerData = styled.div `
   display: flex;
   justify-content: center;
+  margin-bottom: 137px;
 `
 const Submit = styled.div `
   display: flex;
@@ -160,4 +170,45 @@ const Submit = styled.div `
     height: 42px;
     
   }
+`
+
+const Footer = styled.div`
+    width: 100%;
+    height: 117px;
+    position: fixed;
+    bottom: 0;
+    background-color: #000000;
+    display: flex;
+   
+    div:nth-of-type(2){
+        padding-top: 14px;
+        font-size: 26px;
+        color: white;
+        height: 100%;
+        
+        padding-bottom: 14px;
+        display: flex;
+        flex-direction:column ;
+        text-overflow: ellipsis;
+        div{
+          padding-left: 14px;
+        }
+    }
+
+`
+
+const Banner = styled.div`
+margin-top:14px ;
+margin-bottom: 14px;
+margin-left: 10px;
+width: 64px;
+height: 89px;
+background-color: white;
+display: flex;
+justify-content: center;
+align-items: center;
+img{
+    width: 48px;
+    height: 72px;
+}
 `
