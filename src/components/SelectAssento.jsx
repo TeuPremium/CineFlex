@@ -23,7 +23,7 @@ export default function SelectAssento(prop) {
       </form>
     </Container>
     <SeatStyles>
-      <Seat></Seat> <Seat></Seat> <SeatUnavailable></SeatUnavailable>
+      <SeatSelected></SeatSelected> <SeatAvailable></SeatAvailable> <SeatUnavailable></SeatUnavailable>
 
       
     </SeatStyles>
@@ -57,6 +57,17 @@ const SeatUnavailable = styled.div`
     justify-content: center;
     align-items: center;
 `
+const SeatAvailable = styled.div`
+    display: flex;
+    width: 24px;
+    height: 24px;
+    border-radius: 24px;
+    background-color: #5992d3;
+    margin-right: 10px;
+    margin-bottom: 18px;
+    justify-content: center;
+    align-items: center;
+`
 const SeatStyles = styled.div`
 justify-content: center;
 display: flex;
@@ -75,4 +86,15 @@ margin-left: 25px;
 span{
   margin-right: 25px ;
 }
+`
+const SeatSelected = styled.div`
+    display: flex;
+    width: 24px;
+    height: 24px;
+    border-radius: 24px;
+    background-color:#1aae9e;
+    margin-right: 10px;
+    margin-bottom: 18px;
+    justify-content: center;
+    align-items: center;
 `
