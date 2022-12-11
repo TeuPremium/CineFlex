@@ -8,6 +8,8 @@ import axios from 'axios';
 import Loading from './components/Loading';
 import styled from 'styled-components';
 import SelectTime from './components/SelectTime';
+import SelectAssento from './components/SelectAssento';
+
 
 function App() {
   const [section, setSection]=useState('Selecione o filme')
@@ -35,12 +37,20 @@ function App() {
   /*apagar*/
   let getHora = axios.get('https://mock-api.driven.com.br/api/v8/cineflex/movies/2/showtimes')
   getHora.then(timeSet)
+  let getSection = axios.get('https://mock-api.driven.com.br/api/v7/cineflex/showtimes/17/seats')
+  getSection.then(movieSectionSet)
   /*apagar*/
   function timeSet (input){
 
     if(!time){(setTime(input.data))}
     
   }
+
+  function movieSectionSet (input){
+    if(!movieSection){(setMovieSection(input.data))}
+   
+  }
+ 
   
 
   return (
@@ -51,8 +61,11 @@ function App() {
 
   {movies ? movies.map((n) => <SelectMovie movieId={n.id} movieTitle={n.title} moviePoster={n.posterURL} movieOverview={n.overview} movieReleaseDate={n.releaseDate} />) : <Loading />}
     
-  </MovieCatalog>*/}
+  </MovieCatalog>
   {time ?  <SelectTime movieTitle={time.title} movieDays={time.days} moviePoster={time.posterURL} movieSection={(movieSection)=>setMovieSection(movieSection)} /> : <Loading />}
+*/}
+  { movieSection ? <SelectAssento seats={movieSection.seats} movie={movieSection.movie} day={movieSection.day}/> : <Loading/>}
+  
   </>
   );
 }

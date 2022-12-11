@@ -1,9 +1,12 @@
 import styled from "styled-components";
 
 
-export default function SelectTime(prop) {
 
+export default function SelectTime(prop) {
+    
     let days = [... prop.movieDays]
+    
+
     
 
   return (
@@ -19,6 +22,7 @@ export default function SelectTime(prop) {
   <Footer>
     <Banner><img src={prop.moviePoster}/></Banner>
     <div>{prop.movieTitle}</div>
+    
   </Footer>
     </>
   );
