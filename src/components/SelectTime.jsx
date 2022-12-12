@@ -12,13 +12,10 @@ export default function SelectTime(prop) {
     
   let params = useParams()  
   params = params.sessionId
-  console.log(params)
+  
     
   let [movieData, setMovieData] = useState(axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/movies/${params}/showtimes`))
   
-  function movieSet () {
-    if(!movieSet){setMovieData('aaaa')}
-  }
 
   movieData.then(getMovie)
   movieData.catch(console.log('ocorreu um erro, tente novamente mais tarde'))

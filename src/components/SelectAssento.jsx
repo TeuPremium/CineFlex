@@ -1,11 +1,36 @@
+import axios from "axios";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Seat from "./Seat";
+import { useParams } from "react-router-dom";
 
 
 
 export default function SelectAssento(prop) {
+
+  let params = useParams()  
+  params = params.sessionId
+  
+  const [room, setRoom] = useState(axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${params}/seats`))
+  room.then(getRoom)
+  room.catch('aguardando')
+  const [roomData, setRoomData] = useState()
+
+  const [available, setAvailable] = useState()
+  const [movieTitle, setMovieTitle] = useState()
+  const [posterURL, setPosterURL] = useState()
+
+  function getRoom(params) {
+    if(roomData){
+
+    }
+    else{
+    setRoomData(params.data)
+    console.log(roomData)
+    }
+  }
+
   let seats = [... prop.seats]
   
   let [ids, setIds] = useState()
@@ -16,11 +41,11 @@ export default function SelectAssento(prop) {
     
     <Container>
       <form>
-      <SeatSelection>
+      <SeatSelection >
 
-        {seats.map((n) => n.isAvailable ? <Seat  value={n.id} number={n.name} ids={(ids) => setIds(ids)}></Seat> : <SeatUnavailable value={n.id}>{n.name}</SeatUnavailable>)}
+        {roomData ? roomData.seats.map((n) => n.isAvailable ? <Seat  value={n.id} number={n.name} ids={(ids) => setIds(ids)}></Seat> : <SeatUnavailable value={n.id}>{n.name}</SeatUnavailable>) : ''}
           
-      
+        
       </SeatSelection>
       </form>
     </Container>
@@ -56,11 +81,11 @@ export default function SelectAssento(prop) {
     </BuyerData>
 
     <Footer>
-    <Banner><img src={prop.moviePoster}/></Banner>
-    <div>
-    <div>{prop.movieTitle}</div>
-    <div>{prop.day.weekday} {prop.time}</div>
-    </div>
+    <Banner>{roomData ? <img src={roomData.movie.posterURL}/> : 'poster'}</Banner>
+    {roomData ? <div>
+    <div>{roomData.movie.title}</div>
+    <div>{roomData.day.weekday} {roomData.name}</div>
+    </div> : 'carregando'}
     </Footer>
 
   </>

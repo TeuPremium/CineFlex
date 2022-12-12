@@ -31,8 +31,6 @@ function App() {
   
   const [time, setTime] = useState()
   
-  const [sectionLink, setSectionLink]=useState('/sessoes/1')
-  
   const [movieSection, setMovieSection] = useState()
   const [timeOptions, setTimeOptions] = useState()
   
@@ -45,12 +43,12 @@ function App() {
     getHora.catch(console.log()) 
   
 
-  if(!timeOptions){
   
-    let getSection = axios.get('https://mock-api.driven.com.br/api/v7/cineflex/showtimes/17/seats')
+  
+  const [getSection, setGetSection] = useState(axios.get('https://mock-api.driven.com.br/api/v7/cineflex/showtimes/17/seats'))
   getSection.then(movieSectionSet)
   
-  }
+  
   /*apagar*/
   function timeSet (input){
 
@@ -80,7 +78,7 @@ function App() {
   <Route path='/sessoes/:sessionId' element={ <SelectTime/>}/>
 
   
-  <Route path='/assentos/:sessionId' element={movieSection ? <SelectAssento movieTitle={movieSection.movie.title} moviePoster={movieSection.movie.posterURL} seats={movieSection.seats} movie={movieSection.movie} day={movieSection.day} time={movieSection.name}/> : <Loading/>}/>
+  <Route path='/assentos/:sessionId' element={movieSection ? <SelectAssento getSection={(getSection) => setGetSection(getSection)} movieTitle={movieSection.movie.title} moviePoster={movieSection.movie.posterURL} seats={movieSection.seats} movie={movieSection.movie} day={movieSection.day} time={movieSection.name}/> : <Loading/>}/>
   <Route path='/sucesso' element={<OrderFinish/>}/>
   
   
@@ -88,14 +86,6 @@ function App() {
   </BrowserRouter>
   );
   
- /*
- return(<>
- <SelectTime>
-
- </SelectTime>
- 
- </>)
-*/
 }
 
 
