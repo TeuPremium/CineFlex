@@ -108,7 +108,7 @@ display: flex;
 justify-content: center;
 align-items: center;
 img{
-    width: 48px;
-    height: 72px;
+    width: 52px;
+    
 }
 `

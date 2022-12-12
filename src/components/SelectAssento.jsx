@@ -27,14 +27,33 @@ export default function SelectAssento(prop) {
     }
     else{
     setRoomData(params.data)
-    console.log(roomData)
+    
     }
   }
 
-  let seats = [... prop.seats]
+  
   
   let [ids, setIds] = useState()
   
+  const [name, setName] = useState('')
+  const [cpf, setCpf] = useState('')
+
+  function setNameBuyer(event){
+    setName(event.target.value)
+    
+  }
+  function setCpfBuyer(event){
+    setCpf(event.target.value)
+    
+  }
+
+  function post(){
+    const reserve = { ids:ids, name:name, cpf:cpf}
+    
+    ids && name && cpf ? axios.post(reserve) : alert('preencha todos os campos').then(console.log(reserve))
+    
+    
+  }
   
   return (
   <>
@@ -43,7 +62,7 @@ export default function SelectAssento(prop) {
       <form>
       <SeatSelection >
 
-        {roomData ? roomData.seats.map((n) => n.isAvailable ? <Seat  value={n.id} number={n.name} ids={(ids) => setIds(ids)}></Seat> : <SeatUnavailable value={n.id}>{n.name}</SeatUnavailable>) : ''}
+        {roomData ? roomData.seats.map((n) => n.isAvailable ? <Seat onClick={()=>setIds(11)}  value={n.id} number={n.name} ids={(ids) => setIds(ids)}></Seat> : <SeatUnavailable value={n.id}>{n.name}</SeatUnavailable>) : ''}
           
         
       </SeatSelection>
@@ -63,19 +82,19 @@ export default function SelectAssento(prop) {
       <NameBuyer>
         
           <div>Nome do comprador:</div>
-        <input type='text'></input>
+        <input onChange={setNameBuyer} type='text'></input>
         
       </NameBuyer>
       <CpfBuyer>
       
           <div>CPF do comprador:</div>
-        <input type='number'></input>
+        <input type='number' onChange={setCpfBuyer}></input>
         
       </CpfBuyer>
       <Submit>
-      <Link to='/sucesso'>
-      <input type="submit" value='Reservar assento(s)'></input>
-      </Link>
+      
+      {ids && cpf && name ? <Link to='/sucesso'> <input type="submit" value='Reservar assento(s)' onClick={post}></input> </Link> : <input type="submit" value='Reservar assento(s)' onClick={() => alert('preencha todos os campos para continuar')}></input> }
+      
       </Submit>
       </label>
     </BuyerData>
@@ -238,7 +257,7 @@ display: flex;
 justify-content: center;
 align-items: center;
 img{
-    width: 48px;
-    height: 72px;
+    width: 54px;
+    
 }
 `
