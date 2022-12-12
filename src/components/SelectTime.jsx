@@ -4,14 +4,17 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Loading from "./Loading";
 import Button from "./Button";
+import { useParams } from "react-router-dom";
 
 
 
 export default function SelectTime(prop) {
     
+  let params = useParams()  
+  params = params.sessionId
+  console.log(params)
     
-    
-  let [movieData, setMovieData] = useState(axios.get('https://mock-api.driven.com.br/api/v8/cineflex/movies/17/showtimes'))
+  let [movieData, setMovieData] = useState(axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/movies/${params}/showtimes`))
   
   function movieSet () {
     if(!movieSet){setMovieData('aaaa')}
