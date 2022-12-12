@@ -3,12 +3,13 @@ import styled from "styled-components";
 import Seat from "./Seat";
 
 
+
 export default function SelectAssento(prop) {
   let seats = [... prop.seats]
   
   let [ids, setIds] = useState()
   
-  console.log(prop.day.weekday)
+  
   return (
   <>
     
@@ -162,6 +163,7 @@ const Submit = styled.div `
   display: flex;
   justify-content: center;
   margin-right: 25px;
+  margin-top: 57px;
   input{
     background-color: #e8833a;
     border-width: 0px;

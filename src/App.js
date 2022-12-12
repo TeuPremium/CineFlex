@@ -9,6 +9,8 @@ import Loading from './components/Loading';
 import styled from 'styled-components';
 import SelectTime from './components/SelectTime';
 import SelectAssento from './components/SelectAssento';
+import OrderFinish from './components/OrderFinish';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 
 function App() {
@@ -29,6 +31,7 @@ function App() {
   
   const [time, setTime] = useState()
   
+  const [sectionLink, setSectionLink]=useState('/sessoes/1')
   
   const [movieSection, setMovieSection] = useState()
   
@@ -54,19 +57,26 @@ function App() {
   
 
   return (
-  <>
+  <BrowserRouter>
   <Header/>
   <Section section={section}/>
-  {/*<MovieCatalog>
+
+  <Routes>
+  <Route path='/' element={<MovieCatalog>
 
   {movies ? movies.map((n) => <SelectMovie movieId={n.id} movieTitle={n.title} moviePoster={n.posterURL} movieOverview={n.overview} movieReleaseDate={n.releaseDate} />) : <Loading />}
     
-  </MovieCatalog>
-  {time ?  <SelectTime movieTitle={time.title} movieDays={time.days} moviePoster={time.posterURL} movieSection={(movieSection)=>setMovieSection(movieSection)} /> : <Loading />}
-*/}
-  { movieSection ? <SelectAssento movieTitle={time.title} moviePoster={time.posterURL} seats={movieSection.seats} movie={movieSection.movie} day={movieSection.day} time={movieSection.name}/> : <Loading/>}
+  </MovieCatalog>}/>
   
-  </>
+  <Route path={sectionLink} element={time ?  <SelectTime movieTitle={time.title} movieDays={time.days} moviePoster={time.posterURL} movieSection={(movieSection)=>setMovieSection(movieSection)} /> : <Loading />}/>
+
+  
+  <Route path='/lol' element={movieSection ? <SelectAssento movieTitle={movieSection.movie.title} moviePoster={movieSection.movie.posterURL} seats={movieSection.seats} movie={movieSection.movie} day={movieSection.day} time={movieSection.name}/> : <Loading/>}/>
+  <Route path='/finishorder' element={<OrderFinish/>}/>
+  
+  
+  </Routes>
+  </BrowserRouter>
   );
 }
 

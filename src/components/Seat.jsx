@@ -41,4 +41,5 @@ const SeatStyle = styled.div`
     margin-bottom: 18px;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 `
