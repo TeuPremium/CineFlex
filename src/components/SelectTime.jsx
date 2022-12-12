@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Loading from "./Loading";
+import Button from "./Button";
 
 
 
@@ -42,8 +43,8 @@ export default function SelectTime(prop) {
   <>
   <Container>
     {available ? available.map((n)=><><h2>{n.weekday}</h2><Options>
-      {n.showtimes.map((m)=><Link to={'/assentos/:265'}><Button>{m.name}</Button></Link>)}
-      </Options></>) : <Loading/>}
+      {n.showtimes.map((m)=> <Button time={m.name} id={m.id}/>)}
+      </Options></>) : ''}
     
   </Container>
   
@@ -61,7 +62,7 @@ export default function SelectTime(prop) {
 const Options = styled.div`
   display: flex;
 `
-
+/*
 const Button = styled.div`
 border-radius : 5px;
 width:82px;
@@ -73,6 +74,7 @@ display: flex;
 justify-content: center;
 align-items: center;
 `
+*/
 
 const Container = styled.div`
     margin-left: 24px;
