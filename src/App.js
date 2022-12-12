@@ -10,7 +10,7 @@ import styled from 'styled-components';
 import SelectTime from './components/SelectTime';
 import SelectAssento from './components/SelectAssento';
 import OrderFinish from './components/OrderFinish';
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 
 
 function App() {
@@ -34,19 +34,18 @@ function App() {
   const [sectionLink, setSectionLink]=useState('/sessoes/1')
   
   const [movieSection, setMovieSection] = useState()
-  
   const [timeOptions, setTimeOptions] = useState()
   
   
 
   /*apagar*/
-  if(timeOptions){
+  
     let getHora = axios.get(timeOptions)
     getHora.then(timeSet)
     getHora.catch(console.log()) 
-  }
+  
 
-  if(timeOptions){
+  if(!timeOptions){
   
     let getSection = axios.get('https://mock-api.driven.com.br/api/v7/cineflex/showtimes/17/seats')
   getSection.then(movieSectionSet)
@@ -61,7 +60,7 @@ function App() {
 
   function movieSectionSet (input){
     if(!movieSection){(setMovieSection(input.data))}
-   
+   console.log(movieSection)
   }
  
   
@@ -70,7 +69,7 @@ function App() {
   <BrowserRouter>
   <Header/>
   <Section section={section}/>
-
+  
   <Routes>
   <Route path='/' element={<MovieCatalog>
 
@@ -78,17 +77,27 @@ function App() {
     
   </MovieCatalog>}/>
   
-  <Route path='' element={time ?  <SelectTime movieTitle={time.title} movieDays={time.days} moviePoster={time.posterURL} movieSection={(movieSection)=>setMovieSection(movieSection)} /> : <Loading />}/>
+  <Route path='/sessoes/:sessionId' element={ <SelectTime/>}/>
 
   
-  <Route path='/sessoes/:sessionId' element={movieSection ? <SelectAssento movieTitle={movieSection.movie.title} moviePoster={movieSection.movie.posterURL} seats={movieSection.seats} movie={movieSection.movie} day={movieSection.day} time={movieSection.name}/> : <Loading/>}/>
+  <Route path='/assentos/:sessionId' element={movieSection ? <SelectAssento movieTitle={movieSection.movie.title} moviePoster={movieSection.movie.posterURL} seats={movieSection.seats} movie={movieSection.movie} day={movieSection.day} time={movieSection.name}/> : <Loading/>}/>
   <Route path='/sucesso' element={<OrderFinish/>}/>
   
   
   </Routes>
   </BrowserRouter>
   );
+  
+ /*
+ return(<>
+ <SelectTime>
+
+ </SelectTime>
+ 
+ </>)
+*/
 }
+
 
 const MovieCatalog = styled.div `
 width: 90%;

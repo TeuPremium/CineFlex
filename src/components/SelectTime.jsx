@@ -1,31 +1,60 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
+import Loading from "./Loading";
 
 
 
 export default function SelectTime(prop) {
     
-    let days = [... prop.movieDays]
+    
+    
+  let [movieData, setMovieData] = useState(axios.get('https://mock-api.driven.com.br/api/v8/cineflex/movies/17/showtimes'))
+  
+  function movieSet () {
+    if(!movieSet){setMovieData('aaaa')}
+  }
+
+  movieData.then(getMovie)
+  movieData.catch(console.log('ocorreu um erro, tente novamente mais tarde'))
+
+  let days
+  const [available, setAvailable] = useState()
+  const [movieTitle, setMovieTitle] = useState()
+  const [posterURL, setPosterURL] = useState()
+
+  function getMovie(params) {
+    days=params.data
+    console.log(days)
+    setAvailable(days.days)
+    setMovieTitle(days.title)
+    setPosterURL(days.posterURL)
+    console.log(available)
+   
+  }
+  
     
 
-    
-
+  console.log(movieData)
+  
   return (
   <>
   <Container>
-  {days.map((n)=><><h2>{n.weekday}</h2>
-  <Options>
-    {n.showtimes.map((m)=><Button onClick={()=>{prop.movieSection(m.id)}}>{m.name}</Button>)}
-  </Options></>)}
-  
+    {available ? available.map((n)=><><h2>{n.weekday}</h2><Options>
+      {n.showtimes.map((m)=><Link to={'/assentos/:265'}><Button>{m.name}</Button></Link>)}
+      </Options></>) : <Loading/>}
+    
   </Container>
   
   <Footer>
-    <Banner><img src={prop.moviePoster}/></Banner>
-    <div>{prop.movieTitle}</div>
+  <Banner><img src={posterURL}/></Banner>
+    <div>{movieTitle}</div>
     
   </Footer>
     </>
   );
+  
 }
 
 
