@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import Header from './components/Header';
-import SelectMovie from './components/Movies/SelectMovie';
+import SelectMovie from './components/SelectMovie';
 import Section from './components/Section';
 import { useState } from 'react';
 import axios from 'axios';
@@ -35,18 +35,28 @@ function App() {
   
   const [movieSection, setMovieSection] = useState()
   
+  const [timeOptions, setTimeOptions] = useState()
+  
   
 
   /*apagar*/
-  let getHora = axios.get('https://mock-api.driven.com.br/api/v8/cineflex/movies/2/showtimes')
-  getHora.then(timeSet)
-  let getSection = axios.get('https://mock-api.driven.com.br/api/v7/cineflex/showtimes/17/seats')
+  if(timeOptions){
+    let getHora = axios.get(timeOptions)
+    getHora.then(timeSet)
+    getHora.catch(console.log()) 
+  }
+
+  if(timeOptions){
+  
+    let getSection = axios.get('https://mock-api.driven.com.br/api/v7/cineflex/showtimes/17/seats')
   getSection.then(movieSectionSet)
+  
+  }
   /*apagar*/
   function timeSet (input){
 
     if(!time){(setTime(input.data))}
-    
+    console.log(timeOptions, 'awa')
   }
 
   function movieSectionSet (input){
@@ -64,15 +74,15 @@ function App() {
   <Routes>
   <Route path='/' element={<MovieCatalog>
 
-  {movies ? movies.map((n) => <SelectMovie movieId={n.id} movieTitle={n.title} moviePoster={n.posterURL} movieOverview={n.overview} movieReleaseDate={n.releaseDate} />) : <Loading />}
+  {movies ? movies.map((n) => <SelectMovie sessao={timeOptions=>setTimeOptions(timeOptions)} movieId={n.id} movieTitle={n.title} moviePoster={n.posterURL} movieOverview={n.overview} movieReleaseDate={n.releaseDate} />) : <Loading />}
     
   </MovieCatalog>}/>
   
-  <Route path={sectionLink} element={time ?  <SelectTime movieTitle={time.title} movieDays={time.days} moviePoster={time.posterURL} movieSection={(movieSection)=>setMovieSection(movieSection)} /> : <Loading />}/>
+  <Route path='' element={time ?  <SelectTime movieTitle={time.title} movieDays={time.days} moviePoster={time.posterURL} movieSection={(movieSection)=>setMovieSection(movieSection)} /> : <Loading />}/>
 
   
-  <Route path='/lol' element={movieSection ? <SelectAssento movieTitle={movieSection.movie.title} moviePoster={movieSection.movie.posterURL} seats={movieSection.seats} movie={movieSection.movie} day={movieSection.day} time={movieSection.name}/> : <Loading/>}/>
-  <Route path='/finishorder' element={<OrderFinish/>}/>
+  <Route path='/sessoes/:sessionId' element={movieSection ? <SelectAssento movieTitle={movieSection.movie.title} moviePoster={movieSection.movie.posterURL} seats={movieSection.seats} movie={movieSection.movie} day={movieSection.day} time={movieSection.name}/> : <Loading/>}/>
+  <Route path='/sucesso' element={<OrderFinish/>}/>
   
   
   </Routes>

@@ -1,12 +1,15 @@
 import axios from "axios";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export default function SelectMovie(prop) {
- console.log(prop.moviePoster)
+  const idFilme = `/sessoes/${prop.movieId}/`
   return (
-    <Container>
+    <Container onClick={() => prop.sessao(idFilme)}>
+      <Link to={idFilme}>
       <img src={prop.moviePoster}/>
+      </Link>
     </Container>
     );
   }
@@ -17,16 +20,18 @@ export default function SelectMovie(prop) {
     left: 205px;
     top: 389px;
     background: #FFFFFF;
-    box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.1);
     border-radius: 3px;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-right: 25%;
     margin-bottom: 11px;
+    cursor: pointer;
       img{
         width: 129px;
         height: 193px;
+        border-radius: 3px;
       }
   `
   

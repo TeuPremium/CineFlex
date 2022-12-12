@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Seat from "./Seat";
 
@@ -47,7 +48,9 @@ export default function SelectAssento(prop) {
         
       </CpfBuyer>
       <Submit>
+      <Link to='/sucesso'>
       <input type="submit" value='Reservar assento(s)'></input>
+      </Link>
       </Submit>
       </label>
     </BuyerData>

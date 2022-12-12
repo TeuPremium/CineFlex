@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export default function OrderFinish(prop) {
@@ -24,7 +25,9 @@ export default function OrderFinish(prop) {
     CPF:<br/>
     </Container>
     <HomeBtn>
+      <Link to='/'>
       <input type="button" value="Voltar para Home" />
+      </Link>
     </HomeBtn>
     </>
     );
