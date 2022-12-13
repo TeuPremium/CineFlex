@@ -6,6 +6,7 @@ let selectedSeats = [], seatnumber = []
 
 export default function Seat(prop){
     const [seatColor, setSeatColor] = useState('#c3cfd9') 
+    const [seatBorder, setSeatBorder] = useState('#808f9d')
     function toggleSelectedSeat(target){
         selectedSeats.includes(prop.value) ?  removeSeat(prop.value) : selectedSeats.push(prop.value)
         seatnumber.includes(prop.number) ? removeSeat(prop.number) : seatnumber.push(prop.number)
@@ -26,7 +27,7 @@ export default function Seat(prop){
 
     return(
         <>
-        <SeatStyle  onClick={() => {toggleSelectedSeat(prop.number); prop.ids(selectedSeats); prop.numberReturn(seatnumber)}} color={seatColor}>{prop.number}</SeatStyle>
+        <SeatStyle  onClick={() => {toggleSelectedSeat(prop.number); prop.ids(selectedSeats); prop.numberReturn(seatnumber)}} border={seatBorder} color={seatColor}>{prop.number}</SeatStyle>
         </>
         )
     
@@ -38,9 +39,13 @@ const SeatStyle = styled.div`
     height: 24px;
     border-radius: 24px;
     background-color:${props => props.color};
+    border-color:${props => props.border};
+    border-width: 1px;
+    border-style: solid;
     margin-right: 10px;
     margin-bottom: 18px;
     justify-content: center;
     align-items: center;
+    box-sizing: border-box;
     cursor: pointer;
 `

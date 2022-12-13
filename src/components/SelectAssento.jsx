@@ -133,7 +133,11 @@ const SeatUnavailable = styled.div`
     width: 24px;
     height: 24px;
     border-radius: 24px;
-    background-color: #f7c52b;
+    border-color: #f7c52b;
+    background-color: #fbe192;
+    box-sizing: border-box;
+    border-width: 1px;
+    border-style: solid;
     margin-right: 10px;
     margin-bottom: 18px;
     justify-content: center;
@@ -150,6 +154,10 @@ const SeatAvailable = styled.div`
     margin-bottom: 18px;
     justify-content: center;
     align-items: center;
+    border-color: #808f9d;
+    border-width: 1px;
+    box-sizing: border-box;
+    border-style: solid;
     
 `
 const SeatStyles = styled.div`
@@ -181,6 +189,10 @@ const SeatSelected = styled.div`
     margin-bottom: 18px;
     justify-content: center;
     align-items: center;
+    border-color:#0e7d71 ;
+    border-width: 1px;
+    border-style:solid;
+    box-sizing: border-box;
 `
 
 const CpfBuyer = styled.div`
@@ -193,6 +205,15 @@ const CpfBuyer = styled.div`
     background-color: white;
     width: 327px;
     height: 51px;
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    input[type=number] {
+    -moz-appearance: textfield;
+}
+
+}
   }
 `
 const NameBuyer = styled.div`
