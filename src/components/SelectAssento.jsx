@@ -17,10 +17,6 @@ export default function SelectAssento(prop) {
   room.catch('aguardando')
   const [roomData, setRoomData] = useState()
 
-  const [available, setAvailable] = useState()
-  const [movieTitle, setMovieTitle] = useState()
-  const [posterURL, setPosterURL] = useState()
-
   function getRoom(params) {
     if(roomData){
 
@@ -37,6 +33,7 @@ export default function SelectAssento(prop) {
   
   const [name, setName] = useState('')
   const [cpf, setCpf] = useState('')
+ 
 
   function setNameBuyer(event){
     setName(event.target.value)
@@ -55,6 +52,8 @@ export default function SelectAssento(prop) {
     
   }
   
+
+
   return (
   <>
     
@@ -91,7 +90,7 @@ export default function SelectAssento(prop) {
         <input type='number' onChange={setCpfBuyer}></input>
         
       </CpfBuyer>
-      <Submit>
+      <Submit onClick={()=>{prop.cpf(cpf) ; prop.name(name)}}>
       
       {ids && cpf && name ? <Link to='/sucesso'> <input type="submit" value='Reservar assento(s)' onClick={post}></input> </Link> : <input type="submit" value='Reservar assento(s)' onClick={() => alert('preencha todos os campos para continuar')}></input> }
       

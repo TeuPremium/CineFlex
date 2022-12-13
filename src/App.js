@@ -60,8 +60,10 @@ function App() {
     if(!movieSection){(setMovieSection(input.data))}
    console.log(movieSection)
   }
- 
-  
+
+  const [orderData, setOrderData] = useState()
+  const [cpf, setCpf] = useState()
+  const [name, setName] = useState()
 
   return (
   <BrowserRouter>
@@ -78,8 +80,8 @@ function App() {
   <Route path='/sessoes/:sessionId' element={ <SelectTime/>}/>
 
   
-  <Route path='/assentos/:sessionId' element={movieSection ? <SelectAssento getSection={(getSection) => setGetSection(getSection)} movieTitle={movieSection.movie.title} moviePoster={movieSection.movie.posterURL} seats={movieSection.seats} movie={movieSection.movie} day={movieSection.day} time={movieSection.name}/> : <Loading/>}/>
-  <Route path='/sucesso' element={<OrderFinish/>}/>
+  <Route path='/assentos/:sessionId' element={movieSection ? <SelectAssento name={name=>setName(name)} cpf={cpf => setCpf(cpf)} orderData={orderData =>setOrderData(orderData)}/> : <Loading/>}/>
+  <Route path='/sucesso' element={<OrderFinish name={name} cpf={cpf} orderData={orderData}/>}/>
   
   
   </Routes>

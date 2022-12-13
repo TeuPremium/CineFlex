@@ -2,7 +2,8 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export default function OrderFinish(prop) {
-    return (
+  console.log(prop.orderData)  
+  return (
     <>
     <Head>
       Pedido feito com sucesso!
@@ -21,8 +22,8 @@ export default function OrderFinish(prop) {
     </Container>
     <Container>
     <h1>Comprador</h1><br/>
-    Nome:<br/>
-    CPF:<br/>
+    Nome: {prop.name}<br/>
+    CPF: {prop.cpf}<br/>
     </Container>
     <HomeBtn>
       <Link to='/'>
