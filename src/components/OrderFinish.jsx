@@ -15,8 +15,8 @@ export default function OrderFinish(prop) {
     </Container>
     
     <Container>
-      <h1>Ingressos</h1> <br/>
-      assento {prop.seats}<br/>
+      <h1>Ingressos</h1>
+      {prop.seats.map((n) => <p>assento {n}</p>)}<br/>
       
       
     </Container>
@@ -61,6 +61,7 @@ export default function OrderFinish(prop) {
   display: flex;
   justify-content: center;
   margin-top: 60px;
+  margin-bottom: 30px;
     input{
       width: 225px;
       height: 42px;
