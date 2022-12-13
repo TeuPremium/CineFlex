@@ -4,7 +4,7 @@ export default function Button(prop){
     const linkTo = `/assentos/${prop.id}`
     return(
         <Link to={linkTo}>
-        <ButtonStyle>
+        <ButtonStyle data-identifier="showtime" >
         {prop.time}
         </ButtonStyle>
         </Link>

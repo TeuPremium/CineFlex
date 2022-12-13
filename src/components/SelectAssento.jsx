@@ -66,7 +66,7 @@ export default function SelectAssento(prop) {
       <form>
       <SeatSelection >
 
-        {roomData ? roomData.seats.map((n) => n.isAvailable ? <Seat  value={n.id} number={n.name} numberReturn={selectedSeats=>setSelectedSeats(selectedSeats)} ids={(ids) => setIds(ids)}></Seat> : <SeatUnavailable onClick={() => alert('Selecione um assento vazio')} value={n.id}>{n.name}</SeatUnavailable>) : ''}
+        {roomData ? roomData.seats.map((n) => n.isAvailable ? <Seat data-identifier="seat"  value={n.id} number={n.name} numberReturn={selectedSeats=>setSelectedSeats(selectedSeats)} ids={(ids) => setIds(ids)}></Seat> : <SeatUnavailable data-identifier="seat" onClick={() => alert('Esse assento nao esta disponivel')} value={n.id}>{n.name}</SeatUnavailable>) : ''}
           
         
       </SeatSelection>
@@ -86,16 +86,16 @@ export default function SelectAssento(prop) {
       <NameBuyer>
         
           <div>Nome do comprador:</div>
-        <input onChange={setNameBuyer} type='text'></input>
+        <input data-identifier="client-name" placeholder="Digite seu nome" onChange={setNameBuyer} type='text'></input>
         
       </NameBuyer>
       <CpfBuyer>
       
           <div>CPF do comprador:</div>
-        <input type='number' onChange={setCpfBuyer}></input>
+        <input data-test="client-cpf" placeholder="Digite seu cpf" type='number' onChange={setCpfBuyer}></input>
         
       </CpfBuyer>
-      <Submit onClick={()=>{prop.cpf(cpf) ; prop.name(name); prop.movie(roomData); prop.seats(selectedSeats)}}>
+      <Submit data-identifier="book-seat-btn" onClick={()=>{prop.cpf(cpf) ; prop.name(name); prop.movie(roomData); prop.seats(selectedSeats)}}>
       
       {ids && cpf && name ? <Link to='/sucesso'> <input type="submit" value='Reservar assento(s)' onClick={post}></input> </Link> : <input type="submit" value='Reservar assento(s)' onClick={() => alert('preencha todos os campos para continuar')}></input> }
       
@@ -103,7 +103,7 @@ export default function SelectAssento(prop) {
       </label>
     </BuyerData>
 
-    <Footer>
+    <Footer data-identifier="footer">
     <Banner>{roomData ? <img src={roomData.movie.posterURL}/> : 'poster'}</Banner>
     {roomData ? <div>
     <div>{roomData.movie.title}</div>

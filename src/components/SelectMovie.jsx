@@ -25,7 +25,7 @@ export default function SelectMovie(prop) {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: 25%;
+    
     margin-bottom: 11px;
     cursor: pointer;
       img{

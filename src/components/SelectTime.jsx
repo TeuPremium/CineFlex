@@ -45,13 +45,13 @@ export default function SelectTime(prop) {
   <>
   <Section section="Selecione o Horario"></Section>
   <Container>
-    {available ? available.map((n)=><><h2>{n.weekday}</h2><Options>
+    {available ? available.map((n)=><><h2>{n.weekday}</h2><Options data-identifier="movie-day">
       {n.showtimes.map((m)=> <Button time={m.name} id={m.id}/>)}
       </Options></>) : ''}
     
   </Container>
   
-  <Footer>
+  <Footer data-identifier="footer">
   <Banner><img src={posterURL}/></Banner>
     <div>{movieTitle}</div>
     

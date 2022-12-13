@@ -74,7 +74,7 @@ function App() {
   <Route path='/' element={<><Section section="Selecione o Filme"></Section>
   <MovieCatalog>
 
-  {movies ? movies.map((n) => <SelectMovie sessao={timeOptions=>setTimeOptions(timeOptions)} movieId={n.id} movieTitle={n.title} moviePoster={n.posterURL} movieOverview={n.overview} movieReleaseDate={n.releaseDate} />) : <Loading />}
+  {movies ? movies.map((n) => <SelectMovie data-identifier="movie" sessao={timeOptions=>setTimeOptions(timeOptions)} movieId={n.id} movieTitle={n.title} moviePoster={n.posterURL} movieOverview={n.overview} movieReleaseDate={n.releaseDate} />) : <Loading />}
     
   </MovieCatalog></>}/>
   
@@ -97,8 +97,7 @@ width: 90%;
 display: flex;
 flex-wrap: wrap;
 justify-content: space-around;
-margin-left: 12%;
-margin-right: 12%;
+margin: auto;
 `
 
 export default App;

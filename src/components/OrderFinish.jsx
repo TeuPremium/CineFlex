@@ -8,26 +8,26 @@ export default function OrderFinish(prop) {
     <Head>
       Pedido feito com sucesso!
     </Head>
-    <Container>
+    <Container data-identifier='movie-info'>
       <h1>Filme e sessao</h1><br/>
       {prop.movie.movie.title}<br/>
       {prop.movie.day.weekday} {prop.movie.name}<br/>
     </Container>
     
-    <Container>
+    <Container data-identifier='seats-info'>
       <h1>Ingressos</h1>
       {prop.seats.map((n) => <p>assento {n}</p>)}<br/>
       
       
     </Container>
-    <Container>
+    <Container data-identifier='client-info'>
     <h1>Comprador</h1><br/>
     Nome: {prop.name}<br/>
     CPF: {prop.cpf}<br/>
     </Container>
     <HomeBtn>
-      <Link to='/'>
-       <input type="button" value="Voltar para Home" />
+      <Link data-identifier='go-home-btn' to='/'>
+       <input data-test='go-home-btn' type="button" value="Voltar para Home" />
       </Link>
     </HomeBtn>
     </>
