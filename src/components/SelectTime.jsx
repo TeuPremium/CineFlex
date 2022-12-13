@@ -5,6 +5,7 @@ import styled from "styled-components";
 import Loading from "./Loading";
 import Button from "./Button";
 import { useParams } from "react-router-dom";
+import Section from "./Section";
 
 
 
@@ -39,8 +40,10 @@ export default function SelectTime(prop) {
 
   console.log(movieData)
   
-  return (
+  if(available){
+    return (
   <>
+  <Section section="Selecione o Horario"></Section>
   <Container>
     {available ? available.map((n)=><><h2>{n.weekday}</h2><Options>
       {n.showtimes.map((m)=> <Button time={m.name} id={m.id}/>)}
@@ -54,7 +57,8 @@ export default function SelectTime(prop) {
     
   </Footer>
     </>
-  );
+  )}
+  else{return(<Loading/>)}
   
 }
 
@@ -62,19 +66,6 @@ export default function SelectTime(prop) {
 const Options = styled.div`
   display: flex;
 `
-/*
-const Button = styled.div`
-border-radius : 5px;
-width:82px;
-height: 43px;
-background-color: #e8b13a;
-margin-right:8px;
-color: white;
-display: flex;
-justify-content: center;
-align-items: center;
-`
-*/
 
 const Container = styled.div`
     margin-left: 24px;

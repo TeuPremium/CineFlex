@@ -14,8 +14,6 @@ import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 
 
 function App() {
-  const [section, setSection]=useState('Selecione o filme')
-  
   
   const [movies, setMovies] = useState()
   let getMovie = axios.get("https://mock-api.driven.com.br/api/v8/cineflex/movies")
@@ -70,14 +68,15 @@ function App() {
   return (
   <BrowserRouter>
   <Header/>
-  <Section section={section}/>
+  
   
   <Routes>
-  <Route path='/' element={<MovieCatalog>
+  <Route path='/' element={<><Section section="Selecione o Filme"></Section>
+  <MovieCatalog>
 
   {movies ? movies.map((n) => <SelectMovie sessao={timeOptions=>setTimeOptions(timeOptions)} movieId={n.id} movieTitle={n.title} moviePoster={n.posterURL} movieOverview={n.overview} movieReleaseDate={n.releaseDate} />) : <Loading />}
     
-  </MovieCatalog>}/>
+  </MovieCatalog></>}/>
   
   <Route path='/sessoes/:sessionId' element={ <SelectTime/>}/>
 

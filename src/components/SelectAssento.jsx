@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Seat from "./Seat";
 import { useParams } from "react-router-dom";
+import Section from "./Section";
 
 
 
@@ -60,12 +61,12 @@ export default function SelectAssento(prop) {
 
   return (
   <>
-    
+    <Section section="Selecione o(s) Assento(s)"></Section>
     <Container>
       <form>
       <SeatSelection >
 
-        {roomData ? roomData.seats.map((n) => n.isAvailable ? <Seat  value={n.id} number={n.name} numberReturn={selectedSeats=>setSelectedSeats(selectedSeats)} ids={(ids) => setIds(ids)}></Seat> : <SeatUnavailable value={n.id}>{n.name}</SeatUnavailable>) : ''}
+        {roomData ? roomData.seats.map((n) => n.isAvailable ? <Seat  value={n.id} number={n.name} numberReturn={selectedSeats=>setSelectedSeats(selectedSeats)} ids={(ids) => setIds(ids)}></Seat> : <SeatUnavailable onClick={() => alert('Selecione um assento vazio')} value={n.id}>{n.name}</SeatUnavailable>) : ''}
           
         
       </SeatSelection>
@@ -116,6 +117,7 @@ export default function SelectAssento(prop) {
 
 const Container = styled.div`
     width: 345px;
+    margin-top: -25px;
    margin-left: auto;
    margin-right: auto;
    display: flex;
@@ -136,6 +138,7 @@ const SeatUnavailable = styled.div`
     margin-bottom: 18px;
     justify-content: center;
     align-items: center;
+    cursor: not-allowed;
 `
 const SeatAvailable = styled.div`
     display: flex;
@@ -147,6 +150,7 @@ const SeatAvailable = styled.div`
     margin-bottom: 18px;
     justify-content: center;
     align-items: center;
+    
 `
 const SeatStyles = styled.div`
 justify-content: center;
