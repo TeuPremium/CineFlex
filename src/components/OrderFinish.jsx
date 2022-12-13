@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export default function OrderFinish(prop) {
-  console.log(prop.orderData)  
+  console.log(prop.movie)  
   return (
     <>
     <Head>
@@ -10,13 +10,13 @@ export default function OrderFinish(prop) {
     </Head>
     <Container>
       <h1>Filme e sessao</h1><br/>
-      a<br/>
-      a<br/>
+      {prop.movie.movie.title}<br/>
+      {prop.movie.day.weekday} {prop.movie.name}<br/>
     </Container>
     
     <Container>
       <h1>Ingressos</h1> <br/>
-      a<br/>
+      {prop.seats}<br/>
       a
       
     </Container>

@@ -45,12 +45,29 @@ export default function SelectAssento(prop) {
   }
 
   function post(){
-    const reserve = { ids:ids, name:name, cpf:cpf}
+    const reserve = [{ ids:ids, name:name, cpf:cpf}]
     
     ids && name && cpf ? axios.post(reserve) : alert('preencha todos os campos').then(console.log(reserve))
     
     
   }
+
+  let selectedSeats = []
+  function toggleSelectedSeat(target){
+    selectedSeats.includes(target.value) ?  removeSeat(target.value) : selectedSeats.push(target.value)
+    console.log(selectedSeats)
+  }
+
+function removeSeat(id){
+    for(let i=0;i<=selectedSeats.length;i++){
+        if(selectedSeats[i]===id){
+            selectedSeats.splice(i, 1)
+        }
+        
+    }
+    
+}
+
   
 
 
@@ -61,7 +78,7 @@ export default function SelectAssento(prop) {
       <form>
       <SeatSelection >
 
-        {roomData ? roomData.seats.map((n) => n.isAvailable ? <Seat onClick={()=>setIds(11)}  value={n.id} number={n.name} ids={(ids) => setIds(ids)}></Seat> : <SeatUnavailable value={n.id}>{n.name}</SeatUnavailable>) : ''}
+        {roomData ? roomData.seats.map((n) => n.isAvailable ? <Seat onChange={toggleSelectedSeat}  value={n.id} number={n.name} ids={(ids) => setIds(ids)}></Seat> : <SeatUnavailable value={n.id}>{n.name}</SeatUnavailable>) : ''}
           
         
       </SeatSelection>
@@ -90,7 +107,7 @@ export default function SelectAssento(prop) {
         <input type='number' onChange={setCpfBuyer}></input>
         
       </CpfBuyer>
-      <Submit onClick={()=>{prop.cpf(cpf) ; prop.name(name)}}>
+      <Submit onClick={()=>{prop.cpf(cpf) ; prop.name(name); prop.seats(selectedSeats); prop.movie(roomData)}}>
       
       {ids && cpf && name ? <Link to='/sucesso'> <input type="submit" value='Reservar assento(s)' onClick={post}></input> </Link> : <input type="submit" value='Reservar assento(s)' onClick={() => alert('preencha todos os campos para continuar')}></input> }
       

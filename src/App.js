@@ -64,6 +64,8 @@ function App() {
   const [orderData, setOrderData] = useState()
   const [cpf, setCpf] = useState()
   const [name, setName] = useState()
+  const [seats, setSeats] = useState()
+  const [finalMovie, setFinalMovie] = useState()
 
   return (
   <BrowserRouter>
@@ -80,8 +82,8 @@ function App() {
   <Route path='/sessoes/:sessionId' element={ <SelectTime/>}/>
 
   
-  <Route path='/assentos/:sessionId' element={movieSection ? <SelectAssento name={name=>setName(name)} cpf={cpf => setCpf(cpf)} orderData={orderData =>setOrderData(orderData)}/> : <Loading/>}/>
-  <Route path='/sucesso' element={<OrderFinish name={name} cpf={cpf} orderData={orderData}/>}/>
+  <Route path='/assentos/:sessionId' element={movieSection ? <SelectAssento movie={finalMovie=>setFinalMovie(finalMovie)} seats={seats=>setSeats(seats)} name={name=>setName(name)} cpf={cpf => setCpf(cpf)} orderData={orderData =>setOrderData(orderData)}/> : <Loading/>}/>
+  <Route path='/sucesso' element={<OrderFinish movie={finalMovie} seats={seats} name={name} cpf={cpf} orderData={orderData}/>}/>
   
   
   </Routes>
