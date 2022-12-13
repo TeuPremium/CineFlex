@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export default function OrderFinish(prop) {
-  console.log(prop.movie)  
+  console.log(prop.seats)  
   return (
     <>
     <Head>
@@ -16,8 +16,8 @@ export default function OrderFinish(prop) {
     
     <Container>
       <h1>Ingressos</h1> <br/>
-      {prop.seats}<br/>
-      a
+      assento {prop.seats}<br/>
+      
       
     </Container>
     <Container>

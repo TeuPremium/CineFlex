@@ -33,6 +33,7 @@ export default function SelectAssento(prop) {
   
   const [name, setName] = useState('')
   const [cpf, setCpf] = useState('')
+  const [selectedSeats, setSelectedSeats]=useState()
  
 
   function setNameBuyer(event){
@@ -52,21 +53,7 @@ export default function SelectAssento(prop) {
     
   }
 
-  let selectedSeats = []
-  function toggleSelectedSeat(target){
-    selectedSeats.includes(target.value) ?  removeSeat(target.value) : selectedSeats.push(target.value)
-    console.log(selectedSeats)
-  }
-
-function removeSeat(id){
-    for(let i=0;i<=selectedSeats.length;i++){
-        if(selectedSeats[i]===id){
-            selectedSeats.splice(i, 1)
-        }
-        
-    }
-    
-}
+  
 
   
 
@@ -78,7 +65,7 @@ function removeSeat(id){
       <form>
       <SeatSelection >
 
-        {roomData ? roomData.seats.map((n) => n.isAvailable ? <Seat onChange={toggleSelectedSeat}  value={n.id} number={n.name} ids={(ids) => setIds(ids)}></Seat> : <SeatUnavailable value={n.id}>{n.name}</SeatUnavailable>) : ''}
+        {roomData ? roomData.seats.map((n) => n.isAvailable ? <Seat  value={n.id} number={n.name} numberReturn={selectedSeats=>setSelectedSeats(selectedSeats)} ids={(ids) => setIds(ids)}></Seat> : <SeatUnavailable value={n.id}>{n.name}</SeatUnavailable>) : ''}
           
         
       </SeatSelection>
@@ -107,7 +94,7 @@ function removeSeat(id){
         <input type='number' onChange={setCpfBuyer}></input>
         
       </CpfBuyer>
-      <Submit onClick={()=>{prop.cpf(cpf) ; prop.name(name); prop.seats(selectedSeats); prop.movie(roomData)}}>
+      <Submit onClick={()=>{prop.cpf(cpf) ; prop.name(name); prop.movie(roomData); prop.seats(selectedSeats)}}>
       
       {ids && cpf && name ? <Link to='/sucesso'> <input type="submit" value='Reservar assento(s)' onClick={post}></input> </Link> : <input type="submit" value='Reservar assento(s)' onClick={() => alert('preencha todos os campos para continuar')}></input> }
       

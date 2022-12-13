@@ -2,12 +2,13 @@ import { useState } from "react"
 import { createPortal } from "react-dom"
 import styled from "styled-components"
 
-let selectedSeats = []
+let selectedSeats = [], seatnumber = []
 
 export default function Seat(prop){
     const [seatColor, setSeatColor] = useState('#c3cfd9') 
     function toggleSelectedSeat(target){
         selectedSeats.includes(prop.value) ?  removeSeat(prop.value) : selectedSeats.push(prop.value)
+        seatnumber.includes(prop.number) ? removeSeat(prop.number) : seatnumber.push(prop.number)
         seatColor == '#c3cfd9' ? setSeatColor('#1aae9e') : setSeatColor('#c3cfd9')
         console.log(selectedSeats)
         
@@ -25,7 +26,7 @@ export default function Seat(prop){
 
     return(
         <>
-        <SeatStyle  onClick={() => {toggleSelectedSeat(prop.number); prop.ids(selectedSeats)}} color={seatColor}>{prop.number}</SeatStyle>
+        <SeatStyle  onClick={() => {toggleSelectedSeat(prop.number); prop.ids(selectedSeats); prop.numberReturn(seatnumber)}} color={seatColor}>{prop.number}</SeatStyle>
         </>
         )
     
